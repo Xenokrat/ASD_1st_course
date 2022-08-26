@@ -47,7 +47,6 @@ class LinkedList:
         is_first_found = False
 
         while node is not None:
-
             if is_first_found and not all:
                 return None
 
@@ -65,11 +64,17 @@ class LinkedList:
                 continue
 
             parent = node
-            self.tail = parent
             node = node.next
 
         if self.head is None:
             self.tail = None
+            return None
+
+        if parent.next is None:
+            self.tail = parent
+        else:
+            self.tail = parent.next
+        return None
 
     def clean(self):
         self.head = None
@@ -84,6 +89,14 @@ class LinkedList:
         return counter
 
     def insert(self, afterNode, newNode):
+
+        # if list was empty
+        if self.tail is None:
+            newNode.next = None
+            self.tail = newNode
+            self.head = newNode
+            return None
+
         if afterNode is None:
             newNode.next = self.head
             self.head = newNode
@@ -94,6 +107,12 @@ class LinkedList:
             if node == afterNode:
                 newNode.next = node.next
                 node.next = newNode
-                return None
+                break
 
             node = node.next
+
+        # if newNode was inserted as last element
+        if newNode.next is None:
+            self.tail = newNode
+
+        return None
