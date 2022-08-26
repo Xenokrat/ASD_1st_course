@@ -1,5 +1,6 @@
 import unittest
 from linked_list import *
+from combine_linked_lists import combine_linked_lists
 
 
 def construct_many_elements_list():
@@ -110,6 +111,13 @@ class MyTestCase(unittest.TestCase):
 
         s_list.insert(None, n5)
         self.assertEqual(s_list.head, n5)
+
+    def test_combine_linked_lists(self):
+        list1 = construct_many_elements_list()
+        list2 = construct_many_elements_list()
+        res = combine_linked_lists(list1, list2)
+        self.assertEqual(res.head.value, 2)
+        self.assertEqual(res.tail.value, 2)
 
 
 if __name__ == '__main__':
