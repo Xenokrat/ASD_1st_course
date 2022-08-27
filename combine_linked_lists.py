@@ -6,7 +6,7 @@ def combine_linked_lists(l_list1: LinkedList, l_list2: LinkedList):
     :param l_list1: instance of LinkedList
     :param l_list2: instance of LinkedList
     :return: LinkedList with values equal to sum of values of l_list1 and l_list2 for each node
-    or None not applicable
+    or None if not applicable
     """
     # check if linked lists have same length, or it's empty lists
     if (not l_list1.len() == l_list2.len()) or (l_list1.len() == 0):
