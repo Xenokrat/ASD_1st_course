@@ -1,3 +1,5 @@
 # This is practice repro for algorithms and data structures course
 
-1. Linked lists (one-way)
+- [x] Linked lists (one-way)
+- [x] Linked lists (two-way) check
+- [ ] Dynamic arrays
