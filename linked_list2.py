@@ -95,6 +95,8 @@ class LinkedList2:
             if node == afterNode:
                 node.next.prev = newNode
                 node.next = newNode
+                newNode.prev = node
+                newNode.next = node.next
             node = node.next
 
         return None
