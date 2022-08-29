@@ -6,15 +6,16 @@ class Node:
 
 
 class DummyNode(Node):
-    def __init__(self, v):
-        super().__init__(v)
+    def __init__(self):
+        self.prev = None
+        self.next = None
 
 
 class LinkedListDummy:
     def __init__(self):
         # initialize with empty (dummy) nodes
-        self.__head = DummyNode(None)
-        self.__tail = DummyNode(None)
+        self.__head = DummyNode()
+        self.__tail = DummyNode()
         # connect dummy nodes for empty list
         self.__head.next = self.__tail
         self.__tail.prev = self.__head
@@ -52,7 +53,7 @@ class LinkedListDummy:
 
     def find(self, val):
         node = self.__head.next
-        while type(node) == Node:
+        while not isinstance(node, DummyNode):
             if node.value == val:
                 return node
             node = node.next
@@ -61,7 +62,7 @@ class LinkedListDummy:
     def find_all(self, val):
         node = self.__head.next
         res = []
-        while type(node) == Node:
+        while not isinstance(node, DummyNode):
             if node.value == val:
                 res.append(node)
             node = node.next
@@ -69,14 +70,14 @@ class LinkedListDummy:
 
     def print_all_nodes(self):
         node = self.__head.next
-        while type(node) == Node:
+        while not isinstance(node, DummyNode):
             print(node.value)
             node = node.next
 
     def delete(self, val, all=False):
         node = self.__head.next
         first_deleted = False
-        while type(node) == Node:
+        while not isinstance(node, DummyNode):
             if first_deleted and not all:
                 return None
 
@@ -96,7 +97,7 @@ class LinkedListDummy:
     def len(self):
         counter = 0
         node = self.__head.next
-        while type(node) == Node:
+        while not isinstance(node, DummyNode):
             counter += 1
             node = node.next
         return counter
@@ -107,7 +108,7 @@ class LinkedListDummy:
             return None
 
         node = self.__head.next
-        while type(node) == Node:
+        while not isinstance(node, DummyNode):
             if node == after_node:
                 new_node.prev = node
                 new_node.next = node.next
