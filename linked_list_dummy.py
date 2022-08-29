@@ -12,6 +12,20 @@ class LinkedListDummy:
         self.__head.next = self.__tail
         self.__tail.prev = self.__head
 
+    @property
+    def head(self):
+        if self.__head.next == self.__tail:
+            return None
+        else:
+            return self.__head.next
+
+    @property
+    def tail(self):
+        if self.__tail.prev == self.__head:
+            return None
+        else:
+            return self.__tail.prev
+
     def add_in_tail(self, item):
         item.next = self.__tail
         item.prev = self.__tail.prev
