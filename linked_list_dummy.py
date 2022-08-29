@@ -5,11 +5,16 @@ class Node:
         self.value = v
 
 
+class DummyNode(Node):
+    def __init__(self, v):
+        super().__init__(v)
+
+
 class LinkedListDummy:
     def __init__(self):
         # initialize with empty (dummy) nodes
-        self.__head = Node(None)
-        self.__tail = Node(None)
+        self.__head = DummyNode(None)
+        self.__tail = DummyNode(None)
         # connect dummy nodes for empty list
         self.__head.next = self.__tail
         self.__tail.prev = self.__head
@@ -47,7 +52,7 @@ class LinkedListDummy:
 
     def find(self, val):
         node = self.__head.next
-        while node != self.__tail:
+        while type(node) == Node:
             if node.value == val:
                 return node
             node = node.next
@@ -56,7 +61,7 @@ class LinkedListDummy:
     def find_all(self, val):
         node = self.__head.next
         res = []
-        while node != self.__tail:
+        while type(node) == Node:
             if node.value == val:
                 res.append(node)
             node = node.next
@@ -64,14 +69,14 @@ class LinkedListDummy:
 
     def print_all_nodes(self):
         node = self.__head.next
-        while node != self.__tail:
+        while type(node) == Node:
             print(node.value)
             node = node.next
 
     def delete(self, val, all=False):
         node = self.__head.next
         first_deleted = False
-        while node != self.__tail:
+        while type(node) == Node:
             if first_deleted and not all:
                 return None
 
@@ -91,7 +96,7 @@ class LinkedListDummy:
     def len(self):
         counter = 0
         node = self.__head.next
-        while node is not self.__tail:
+        while type(node) == Node:
             counter += 1
             node = node.next
         return counter
@@ -102,7 +107,7 @@ class LinkedListDummy:
             return None
 
         node = self.__head.next
-        while node is not self.__tail:
+        while type(node) == Node:
             if node == after_node:
                 new_node.prev = node
                 new_node.next = node.next
