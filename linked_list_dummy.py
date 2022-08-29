@@ -7,25 +7,32 @@ class Node:
 
 class LinkedListDummy:
     def __init__(self):
+        # initialize with empty (dummy) nodes
         self.__head = Node(None)
         self.__tail = Node(None)
+        # connect dummy nodes for empty list
         self.__head.next = self.__tail
         self.__tail.prev = self.__head
 
     @property
     def head(self):
+        # return None if list is empty
         if self.__head.next == self.__tail:
             return None
+        # return non-dummy head
         else:
             return self.__head.next
 
     @property
     def tail(self):
+        # return None if list is empty
         if self.__tail.prev == self.__head:
             return None
+        # return non-dummy tail
         else:
             return self.__tail.prev
 
+    # rest is the same as usual LinkedList, with no edge conditions
     def add_in_tail(self, item):
         item.next = self.__tail
         item.prev = self.__tail.prev
