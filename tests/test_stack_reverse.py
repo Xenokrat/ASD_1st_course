@@ -1,10 +1,10 @@
 import unittest
-from stack import *
+from stack_reverse import *
 
 
 class TestStack(unittest.TestCase):
     def test_stack(self):
-        x = Stack()
+        x = StackReverse()
         x.push(0)
         x.push(1)
         x.push(2)
