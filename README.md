@@ -2,4 +2,5 @@
 
 - [x] Linked lists (one-way)
 - [x] Linked lists (two-way) check
-- [ ] Dynamic arrays
+- [x] Dynamic arrays
+- [ ] Stack
