@@ -1,5 +1,6 @@
 import unittest
 from queue import Queue
+from queue_rotate import rotate_queue
 
 
 class TestQueue(unittest.TestCase):
@@ -17,6 +18,17 @@ class TestQueue(unittest.TestCase):
         qu.dequeue()
         qu.dequeue()
         self.assertEqual(qu.size(), 0)
+
+    def test_rotate_queue(self):
+        qu = Queue()
+        qu.enqueue(1)
+        qu.enqueue(2)
+        qu.enqueue(3)
+        qu.enqueue(4)
+        rotate_queue(qu, 3)
+        self.assertEqual(qu.dequeue(), 4)
+        rotate_queue(qu, 8)
+        self.assertEqual(qu.dequeue(), 3)
 
 
 if __name__ == '__main__':
