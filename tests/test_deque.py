@@ -1,5 +1,6 @@
 import unittest
 from deque import Deque
+from deque_palindrome import is_palindrome
 
 
 class TestDeque(unittest.TestCase):
@@ -29,6 +30,16 @@ class TestDeque(unittest.TestCase):
         dq.removeTail()
         self.assertListEqual(dq.array, [1, 0, 1])
         self.assertEqual(dq.size(), 3)
+
+    def test_is_palindrome(self):
+        self.assertTrue(is_palindrome('racecar'))
+        self.assertTrue(is_palindrome('madam'))
+        self.assertTrue(is_palindrome('Eva, can I see bees in a cave?'))
+        self.assertTrue(is_palindrome('Step on no pets.'))
+
+        self.assertFalse(is_palindrome('text'))
+        self.assertFalse(is_palindrome('word'))
+        self.assertFalse(is_palindrome('Some sentence, I dunno.'))
 
 
 if __name__ == '__main__':
