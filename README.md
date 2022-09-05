@@ -3,4 +3,7 @@
 - [x] Linked lists (one-way)
 - [x] Linked lists (two-way) check
 - [x] Dynamic arrays
-- [ ] Stack
+- [x] Stack
+- [x] Queue
+- [x] Deque
+- [ ] Ordered List
