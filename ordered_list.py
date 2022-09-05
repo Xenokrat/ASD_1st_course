@@ -19,90 +19,93 @@ class OrderedList:
         else:
             return 0
 
-    def add(self, value):
-        node_to_write = Node(value)
+    def add(self, node_value: int) -> None:
+        node_to_write = Node(node_value)
 
-        # write to empty list
+        # add to empty list
         if self.head is None:
             self.tail = node_to_write
             self.head = node_to_write
             return None
 
-        if self.compare(value, self.head.value) == -1:
-            self.head.prev = node_to_write
+        if self.compare(node_value, self.head.value) == -1:
             node_to_write.next = self.head
+            self.head.prev = node_to_write
             self.head = node_to_write
             return None
 
-        if self.compare(value, self.tail.value) in (0, 1):
-            self.tail.next = node_to_write
+        if self.compare(node_value, self.tail.value) in (0, 1):
             node_to_write.prev = self.tail
+            self.tail.next = node_to_write
             self.tail = node_to_write
             return None
 
-        current_node = self.head
-        while current_node is not None:
-            compare_here = self.compare(
-                current_node.value,
-                node_to_write.value,
-            )
-
-            compare_next = self.compare(
-                current_node.next.value,
-                node_to_write.value,
-            )
-
-            if compare_here in (-1, 0) and compare_next == 1:
-                node_to_write.prev = current_node
-                node_to_write.next = current_node.next
-                current_node.next = node_to_write
-                current_node.next.prev = node_to_write
-                return None
-
-    def find(self, val):
-        return None  # здесь будет ваш код
-
-    def delete(self, val):
         node = self.head
-        first_deleted = False
         while node is not None:
+            compare_next = self.compare(
+                node.next.value,
+                node_to_write.value,
+            )
 
-            # break if we already deleted first value
-            if first_deleted and not all:
+            if compare_next in (0, 1):
+                node_to_write.next = node.next
+                node_to_write.prev = node
+                node.next.prev = node_to_write
+                node.next = node_to_write
                 return None
-
-            if ((node.value == val)
-                    and (node == self.head)
-                    and (node == self.tail)):
-                self.head = None
-                self.tail = None
-
-            # if it's head
-            elif (node.value == val) and (node == self.head):
-                self.head = node.next
-                self.head.prev = None
-                first_deleted = True
-
-            # if it's tail
-            elif (node.value == val) and (node == self.tail):
-                self.tail = node.prev
-                self.tail.next = None
-                first_deleted = True
-
-            elif node.value == val:
-                node.prev.next = node.next
-                node.next.prev = node.prev
-                first_deleted = True
 
             node = node.next
 
-    def clean(self, asc):
+    def find(self, val: int):
+        if (val < self.head.value) or (val > self.tail.value):
+            return None
+
+        node = self.head
+        while node is not None:
+            if node.value == val:
+                return node
+            elif val < node.value:
+                break
+            node = node.next
+
+        return None
+
+    def delete(self, val) -> None:
+        if self.head == self.tail and self.head.value == val:
+            self.head = None
+            self.tail = None
+            return None
+
+        elif self.head.value == val:
+            self.head = self.head.next
+            self.head.prev = None
+
+        elif self.tail.value == val:
+            self.tail = self.tail.prev
+            self.tail.next = None
+            return None
+
+        node = self.head
+        while node is not None:
+            if node.value == val:
+                node.prev.next = node.next
+                node.next.prev = node.prev
+                return None
+            node = node.next
+
+    def clean(self, asc: bool) -> None:
         self.__ascending = asc
         self.head = None
         self.tail = None
 
-    def len(self):
-        return 0  # здесь будет ваш код
+    def len(self) -> int:
+        node = self.head
+        counter = 0
+        while node is not None:
+            counter += 1
+            node = node.next
+
+        return counter
 
     def get_all(self):
         result = []
@@ -117,13 +120,12 @@ class OrderedStringList(OrderedList):
     def __init__(self, asc: bool) -> None:
         super(OrderedStringList, self).__init__(asc)
 
-    def compare(self, v1: str, v2: str) -> bool:
+    def compare(self, v1: str, v2: str) -> int:
         v1, v2 = v1.strip(), v2.strip()
 
         if v1 < v2:
             return -1
-        elif v1 == v2:
-            return 0
-        else:
+        elif v1 > v2:
             return 1
-        return 0
+        else:
+            return 0
