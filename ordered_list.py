@@ -88,7 +88,7 @@ class OrderedList:
         # empty list
         if self.head is None:
             return None
-            
+
         # one element list
         if self.head == self.tail and self.head.value == val:
             self.head = None
@@ -99,6 +99,7 @@ class OrderedList:
         elif self.head.value == val:
             self.head = self.head.next
             self.head.prev = None
+            return None
 
         # if it's tail
         elif self.tail.value == val:
