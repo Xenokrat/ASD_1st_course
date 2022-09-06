@@ -1,5 +1,5 @@
 class Node:
-    def __init__(self, v: (int | str)) -> None:
+    def __init__(self, v) -> None:
         self.value = v
         self.prev = None
         self.next = None
@@ -13,13 +13,18 @@ class OrderedList:
 
     def compare(self, v1: int, v2: int) -> int:
         if v1 < v2:
-            return -1
+            res = -1
         elif v1 > v2:
-            return 1
+            res = 1
         else:
-            return 0
+            res = 0
+        
+        if not self.__ascending:
+            res = res * -1
+        
+        return res
 
-    def add(self, node_value: int) -> None:
+    def add(self, node_value) -> None:
         node_to_write = Node(node_value)
 
         # add to empty list
@@ -57,15 +62,18 @@ class OrderedList:
             node = node.next
 
     def find(self, val: int):
-        if (val < self.head.value) or (val > self.tail.value):
+        if any([
+            self.compare(val, self.head.value) == -1,  # value less than head
+            self.compare(val, self.tail.value) == 1    # value bigger than tail
+        ]):
             return None
 
         node = self.head
         while node is not None:
-            if node.value == val:
+            if self.compare(val, node.value) == 0:
                 return node
-            elif val < node.value:
-                break
+            elif self.compare(val, node.value) == -1:
+                return None  # stop as value not in list
             node = node.next
 
         return None
@@ -91,6 +99,11 @@ class OrderedList:
                 node.prev.next = node.next
                 node.next.prev = node.prev
                 return None
+            
+            # break if value not in list
+            if self.compare(val, node.value) == -1:
+                return None
+
             node = node.next
 
     def clean(self, asc: bool) -> None:
@@ -122,10 +135,14 @@ class OrderedStringList(OrderedList):
 
     def compare(self, v1: str, v2: str) -> int:
         v1, v2 = v1.strip(), v2.strip()
-
         if v1 < v2:
-            return -1
+            res = -1
         elif v1 > v2:
-            return 1
+            res = 1
         else:
-            return 0
+            res = 0
+        
+        if not self._OrderedList__ascending:
+            res = res * -1
+        
+        return res
