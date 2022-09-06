@@ -62,6 +62,11 @@ class OrderedList:
             node = node.next
 
     def find(self, val: int):
+        
+        # list is empty
+        if self.head is None:
+            return None
+        
         if any([
             self.compare(val, self.head.value) == -1,  # value less than head
             self.compare(val, self.tail.value) == 1    # value bigger than tail
@@ -79,15 +84,23 @@ class OrderedList:
         return None
 
     def delete(self, val) -> None:
+
+        # empty list
+        if self.head is None:
+            return None
+            
+        # one element list
         if self.head == self.tail and self.head.value == val:
             self.head = None
             self.tail = None
             return None
 
+        # if it's head
         elif self.head.value == val:
             self.head = self.head.next
             self.head.prev = None
 
+        # if it's tail
         elif self.tail.value == val:
             self.tail = self.tail.prev
             self.tail.next = None
@@ -100,7 +113,7 @@ class OrderedList:
                 node.next.prev = node.prev
                 return None
             
-            # break if value not in list
+            # break by order-check
             if self.compare(val, node.value) == -1:
                 return None
 
