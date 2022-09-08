@@ -1,4 +1,5 @@
 import unittest
+import random
 
 from hash_table import HashTable
 
@@ -124,20 +125,20 @@ class TestHashTable(unittest.TestCase):
             find_text = table.find(text)
             self.assertEqual(table.slots[find_text], text)
             text += '1'
-    
-    
-    def test_cycle_around(self) -> None:
+        
+        # MORE TESTS
         table = self.create_hash_table(19, 3)
+        list_ = []
+        random_numbers = random.sample(range(30), 19)
+        for num in random_numbers:    
+            text = '1' * num
+            table.put(text)
+            list_.append(text)
         
-        index = 0
-        bool_flag = False
-        index, bool_flag = table.cycle_around(index, bool_flag)
-        self.assertEqual(index, 3)
-        self.assertFalse(bool_flag)
-        
-        index = 17
-        index, bool_flag = table.cycle_around(index, bool_flag)
-        self.assertEqual(index, 1)
-        self.assertTrue(bool_flag)
-    
-        
+          
+        for i in table.slots:
+            self.assertIsNotNone(i)
+            
+        for i in list_:
+            self.assertIsNotNone(table.find(i))
+               
