@@ -30,14 +30,15 @@ class HashTable:
         index = self.hash_fun(value)
         current_index = index
         
-        bool_flag = False  # show if we cycle to end of array and iterate from start
-        while not (index >= current_index and bool_flag):
+        counter = 0
+        while counter < self.size:
             slot = self.slots[index]
             
-            # ? what if we put same value twice?
             if (slot is None) or (slot == value):
                 return index
-            index, bool_flag = self.cycle_around(index, bool_flag)
+            index = (index + self.stp) % self.size
+            counter += 1
+            
         return None
             
     def put(self, value: str) -> int:
@@ -67,32 +68,14 @@ class HashTable:
         index = self.hash_fun(value)
         current_index = index
         
-        bool_flag = False  # show if we cycle to end of array and iterate from start
-        while not (index >= current_index and bool_flag):
+        counter = 0
+        while counter < self.size:
             slot = self.slots[index]
             
             if slot == value:
                 return index
-            index, bool_flag = self.cycle_around(index, bool_flag)
+            index = (index + self.stp) % self.size
+            counter += 1
         return None
     
-    def cycle_around(self, index: int, bool_flag: bool) -> tuple:
-        """Returns index + step for array, starts from beginning of array
-           if index out of boundaries
-
-        Args:
-            index (int): start position
-            bool_flag (bool): True if started from beginning
-
-        Returns:
-            tuple: new index (index + step), do index started from beginning
-        """
-        size = self.size
-        step = self.stp
-        
-        next_index = index + step
-        if next_index > size - 1:
-            bool_flag = True
-            return next_index - size, bool_flag
-        return next_index, bool_flag
             
