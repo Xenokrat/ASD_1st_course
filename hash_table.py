@@ -54,7 +54,6 @@ class HashTable:
         if index:
             self.slots[index] = value
         return index
-        
 
     def find(self, value: str) -> int:
         """find value index in hash-table
