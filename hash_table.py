@@ -51,7 +51,7 @@ class HashTable:
             or None if not possible
         """
         index = self.seek_slot(value)
-        if index:
+        if index is not None:
             self.slots[index] = value
         return index
 
@@ -95,5 +95,4 @@ class HashTable:
             bool_flag = True
             return next_index - size, bool_flag
         return next_index, bool_flag
-            
             
