@@ -11,6 +11,12 @@ class TestHashTable(unittest.TestCase):
         res = table.hash_fun('kek kekov')
         self.assertEqual(res, 9)
         
+        # assert it returns 0 
+        res = table.hash_fun('aaaaaaaaaaaaaaaaaaa')
+        self.assertEqual(res, 0)
+        
+        res = table.hash_fun('')
+        self.assertEqual(res, 0)
     
     def test_seek_slot(self) -> None:
         table = self.create_hash_table(19, 3)
@@ -61,6 +67,19 @@ class TestHashTable(unittest.TestCase):
             table.slots[ind] = 1
         res = table.put('aaaaaaaaaaaaaaaaaaaa')
         self.assertIsNone(res)
+        
+        # assert correct insertion to index 0
+        table = self.create_hash_table(19, 3)
+        text = ''
+        for _ in range(19):
+            table.put(text)
+            text += '1'
+            
+        text = ''
+        for ind in range(19):
+            self.assertEqual(table.slots[ind], text)
+            text += '1'
+        
     
     def test_find(self) -> None:
         table = self.create_hash_table(19, 3)
@@ -79,6 +98,32 @@ class TestHashTable(unittest.TestCase):
         # assert we cannot find what is not in the table
         self.assertIsNone(table.find('mda'))
         self.assertIsNone(table.find('fuuuuuuuuuuuuuuuu'))
+        
+        # more tests
+        table = self.create_hash_table(19, 3)
+        text = ''
+        for _ in range(19):
+            table.put(text)
+            text += '1'
+            
+        text = ''
+        for _ in range(19):
+            find_text = table.find(text)
+            self.assertEqual(table.slots[find_text], text)
+            text += '1'
+            
+        # more tests
+        table = self.create_hash_table(19, 3)
+        text = '11111111111'
+        for _ in range(19):
+            table.put(text)
+            text += '1'
+            
+        text = '11111111111'
+        for _ in range(19):
+            find_text = table.find(text)
+            self.assertEqual(table.slots[find_text], text)
+            text += '1'
     
     
     def test_cycle_around(self) -> None:
