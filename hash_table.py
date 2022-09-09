@@ -66,7 +66,6 @@ class HashTable:
             int: index of value in array or None
         """
         index = self.hash_fun(value)
-        current_index = index
         
         counter = 0
         while counter < self.size:
@@ -78,4 +77,3 @@ class HashTable:
             counter += 1
         return None
     
-            
