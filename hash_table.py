@@ -28,7 +28,6 @@ class HashTable:
             or None if not possible
         """
         index = self.hash_fun(value)
-        current_index = index
         
         counter = 0
         while counter < self.size:
