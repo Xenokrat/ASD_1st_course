@@ -40,9 +40,51 @@ class NativeDictionary:
         return False
     
     def put(self, key: str, value: str) -> int:
-        pass
+        """puts values in array in pair with key
+
+        Args:
+            key (str): key for data access
+            value (str): value we put in assosiative array
+
+        Returns:
+            int: index where are key <-> value or None
+        """
+        index = self.hash_fun(key)
+        counter = 0
+
+        while counter < self.size:
+            slot = self.slots[index]
+            if (slot is None) or (slot == key):
+                self.slots[index] = key
+                self.values[index] = value
+                return index
+
+            index = (index + 3) % self.size
+            counter += 1
+
+        return None
+
     
     def get(self, key: str) -> str:
-        pass
+        """return value by key or None
+
+        Args:
+            key (str): key to search in table
+
+        Returns:
+            str: value
+        """
+        index = self.hash_fun(key)
+        counter = 0
+        
+        while counter < self.size:
+            slot = self.slots[index]
+            if slot == key:
+                return self.values[index]
+            
+            index = (index + 3) % self.size
+            counter += 1
+            
+        return None
 
     
