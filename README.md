@@ -6,4 +6,7 @@
 - [x] Stack
 - [x] Queue
 - [x] Deque
-- [ ] Ordered List
+- [x] Ordered List
+- [x] Hash Table
+- [x] Native Dictionary
+- [ ] Power Set
