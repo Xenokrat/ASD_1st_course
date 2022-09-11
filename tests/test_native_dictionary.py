@@ -50,6 +50,8 @@ class TestNativeDict(unittest.TestCase):
         for i in test_data:
             self.assertTrue(i[1] in table.values)
 
+        self.assertIsNone(table.put('another_one', 'value'))
+
     def test_get(self) -> None:
         table = create_hash_table(7)
         rand_data = create_rand_data(7)
@@ -68,3 +70,5 @@ class TestNativeDict(unittest.TestCase):
             
         for i in test_data:
             self.assertEqual(table.get(i[0]), i[1])
+            
+        self.assertIsNone(table.get('kek'))
