@@ -1,7 +1,3 @@
-from typing import NoReturn, TypeVar
-
-S = TypeVar('S', bound="PowerSet")
-
 class PowerSet:
     def __init__(self) -> None:
         self.container = {}
@@ -13,7 +9,7 @@ class PowerSet:
         """
         return len(self.container)
 
-    def put(self, value: object) -> NoReturn:
+    def put(self, value) -> None:
         """Add any value in set, set have no duplicates
 
         Args:
@@ -21,7 +17,7 @@ class PowerSet:
         """
         self.container[value] = None
 
-    def get(self, value: object) -> bool:
+    def get(self, value) -> bool:
         """Returns True if value in set, False if not
 
         Args:
@@ -32,7 +28,7 @@ class PowerSet:
         """
         return (value in self.container)
 
-    def remove(self, value: object) -> bool:
+    def remove(self, value) -> bool:
         """Delete value in set, return True if succeed, False if value
            not in set
 
@@ -47,7 +43,7 @@ class PowerSet:
             return True
         return False
 
-    def intersection(self, set2: S) -> S:
+    def intersection(self, set2):
         """Return intersection of current set and another set
 
         Args:
@@ -65,7 +61,7 @@ class PowerSet:
                 
         return new_set
 
-    def union(self, set2: S) -> S:
+    def union(self, set2):
         """Return union of elements between current set and another set
 
         Args:
@@ -82,7 +78,7 @@ class PowerSet:
             new_set.put(item)
         return new_set
 
-    def difference(self, set2: S) -> S:
+    def difference(self, set2):
         """Return elements that is in current set but not in another set
 
         Args:
@@ -99,7 +95,7 @@ class PowerSet:
                 
         return new_set
 
-    def issubset(self, set2: S) -> bool:
+    def issubset(self, set2) -> bool:
         """Return True if set2 is a subset of current set, else return False
 
         Args:
