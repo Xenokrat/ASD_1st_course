@@ -9,4 +9,6 @@
 - [x] Ordered List
 - [x] Hash Table
 - [x] Native Dictionary
-- [ ] Power Set
+- [x] Power Set
+- [x] Bloom Filter
+- [x] Native Cache
